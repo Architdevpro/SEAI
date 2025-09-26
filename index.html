@@ -3,47 +3,93 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>TinyNumberBot — Closest Number Chat</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>TinyNumberBot — Upgraded</title>
+  <link rel="stylesheet" href="style/style.css" />
 </head>
 <body>
   <div class="app">
-    <header class="topbar">
-      <h1>TinyNumberBot</h1>
-      <p class="subtitle">Which reference number is your input closest to? — with confidence & Data Verified ID</p>
-    </header>
-
-    <main class="chat-area" id="chatArea">
-      <!-- messages appended here -->
-      <div class="system-note">
-        Default references: <strong>0, 1, 20</strong>. Change them below before sending a query.
-      </div>
-    </main>
-
-    <aside class="controls">
-      <label for="refs">Reference numbers (comma separated)</label>
-      <input id="refs" type="text" value="0,1,20" />
-      <div class="row">
-        <input id="userInput" placeholder="Type a number, e.g. 2 or -30" />
-        <button id="sendBtn">Send</button>
-      </div>
-      <div class="options-row">
-        <button id="copyExampleBtn" class="ghost">Load examples</button>
-        <button id="clearBtn" class="ghost">Clear chat</button>
-      </div>
-      <small class="hint">Confidence is computed from relative distances: higher distance separation → higher confidence.</small>
-    </aside>
-
-    <template id="messageTpl">
-      <div class="message-row">
-        <div class="message user">
-          <div class="bubble user-bubble"></div>
-          <div class="meta">You</div>
+    <aside class="sidebar">
+      <div class="brand">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="20" height="20" rx="6" fill="#0ea5a4"/><path d="M7 12h10M7 8h6M7 16h10" stroke="#04202a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div>
+          <h1>TinyNumberBot</h1>
+          <small>Closest-number assistant</small>
         </div>
       </div>
-    </template>
+
+      <div class="sidebar-section">
+        <label>Session history</label>
+        <ul id="historyList" class="history-list"></ul>
+      </div>
+
+      <div class="sidebar-section">
+        <label>Settings</label>
+        <div class="setting-row">
+          <label>Mode</label>
+          <select id="modeSelect">
+            <option value="closest">Closest (single)</option>
+            <option value="rank">Rank all references</option>
+            <option value="range">Range detection</option>
+          </select>
+        </div>
+
+        <div class="setting-row">
+          <label>Confidence formula</label>
+          <select id="confSelect">
+            <option value="ratio">Relative ratio (default)</option>
+            <option value="exp">Exponential (absolute aware)</option>
+          </select>
+        </div>
+
+        <div class="setting-row">
+          <label>Scale (for exp)</label>
+          <input id="scaleInput" type="number" min="0.1" step="0.1" value="10" />
+        </div>
+
+        <div class="setting-row">
+          <label>Theme</label>
+          <button id="themeToggle" class="btn">Toggle</button>
+        </div>
+
+        <div class="setting-row small">
+          <label>Reference numbers (comma separated)</label>
+          <input id="refsField" value="0,1,20" />
+          <div class="small-row">
+            <button id="saveRefs" class="ghost">Save</button>
+            <button id="resetRefs" class="ghost">Reset</button>
+          </div>
+        </div>
+
+        <div class="setting-row">
+          <button id="exportHistory" class="ghost">Export history (CSV)</button>
+        </div>
+      </div>
+
+      <footer class="sidebar-footer">v1.1 • MIT</footer>
+    </aside>
+
+    <main class="main">
+      <header class="main-top">
+        <div class="search-area">
+          <input id="inputNumber" placeholder="Enter a number (e.g. 2 or -30)" />
+          <button id="sendBtn">Send</button>
+        </div>
+
+        <div class="top-actions">
+          <button id="examplesBtn" class="ghost">Examples</button>
+          <button id="clearBtn" class="ghost">Clear</button>
+        </div>
+      </header>
+
+      <section id="chatWindow" class="chat-window">
+        <div class="system-note">Welcome — try numbers like <strong>2</strong> or <strong>-30</strong>. Change references in the sidebar.</div>
+      </section>
+
+      <div id="typing" class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
+
+    </main>
   </div>
 
-  <script src="JS/script.js"></script>
+  <script src="JS/scripts.js"></script>
 </body>
 </html>
