@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TinyNumberBot — Closest Number Chat</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <h1>TinyNumberBot</h1>
+      <p class="subtitle">Which reference number is your input closest to? — with confidence & Data Verified ID</p>
+    </header>
+
+    <main class="chat-area" id="chatArea">
+      <!-- messages appended here -->
+      <div class="system-note">
+        Default references: <strong>0, 1, 20</strong>. Change them below before sending a query.
+      </div>
+    </main>
+
+    <aside class="controls">
+      <label for="refs">Reference numbers (comma separated)</label>
+      <input id="refs" type="text" value="0,1,20" />
+      <div class="row">
+        <input id="userInput" placeholder="Type a number, e.g. 2 or -30" />
+        <button id="sendBtn">Send</button>
+      </div>
+      <div class="options-row">
+        <button id="copyExampleBtn" class="ghost">Load examples</button>
+        <button id="clearBtn" class="ghost">Clear chat</button>
+      </div>
+      <small class="hint">Confidence is computed from relative distances: higher distance separation → higher confidence.</small>
+    </aside>
+
+    <template id="messageTpl">
+      <div class="message-row">
+        <div class="message user">
+          <div class="bubble user-bubble"></div>
+          <div class="meta">You</div>
+        </div>
+      </div>
+    </template>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
